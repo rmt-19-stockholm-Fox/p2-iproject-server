@@ -7,9 +7,14 @@ module.exports = {
   async loginGoogle(req, res, next) {
     try {
       const googleUser = await gAuth.verify(req.body.token);
+
       const [ user ] = await User.findOrCreate({
         where: { email: googleUser.email },
-        defaults: { password: uuid.random() }
+        defaults: {
+          name: `${googleUser.given_name} ${googleUser.family_name}`,
+          password: uuid.random(),
+          pictureUrl: googleUser.picture
+        }
       });
   
       const token = await jwt.sign({ id: user.id });
@@ -23,11 +28,11 @@ module.exports = {
     }
   },
 
-  async verifyToken(req, res, next) {
+  async getUserByToken(req, res, next) {
     try {
-      const payload = await jwt.verify(req.body.access_token);
+      const payload = await jwt.verify(req.headers.access_token);
       const user = await User.findByPk(payload.id, {
-        attributes: ['email']
+        attributes: ['name', 'email', 'pictureUrl']
       });
 
       res.json(user);
