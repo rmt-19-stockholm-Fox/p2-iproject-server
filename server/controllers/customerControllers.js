@@ -1,14 +1,22 @@
-const { Booking, TravelPost, User } = require('../models')
+const nodemailerSend = require('../helpers/nodemailer')
+const { Booking, TravelPost, User, Event } = require('../models')
 
 class customerController {
     static async postBooking(req, res, next) {
         try {
-            const travelData = await TravelPost.findOne({ where: { id: req.params.postId } })
+            const travelData = await TravelPost.findOne({ 
+                where: { id: req.params.postId },
+                include: {
+                    model: Event
+                },
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+            })
             if (!travelData) throw { name: 'Data not found' }
             const response = await Booking.create({
                 userId: req.payload.id,
                 postId: req.params.postId
             })
+            nodemailerSend(req.payload.email, 'nama', travelData)
             res.status(200).send(response)
         } catch (error) {
             next(error)

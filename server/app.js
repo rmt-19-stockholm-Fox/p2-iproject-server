@@ -18,7 +18,10 @@ app.post('/login' ,controller.login)
 
 app.use(authorization)
 app.post('/travel' ,adminController.postTravel)
+app.get('/travel' ,controller.getTravelPosts)
+app.get('/travel/:id', controller.getTravelPostsById)
 app.post('/events/:travelPostId' ,adminController.postEvents)
+app.get('/events/:travelPostId' ,adminController.getEvents)
 
 app.post('/bookings/:postId', customerController.postBooking)
 app.get('/bookings', customerController.getBooking)

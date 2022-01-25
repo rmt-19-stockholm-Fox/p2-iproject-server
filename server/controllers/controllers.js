@@ -1,6 +1,6 @@
 const { comparePassword } = require('../helpers/bcrypt')
 const { jwtSign } = require('../helpers/jwt')
-const { User } = require('../models')
+const { User, TravelPost, Event } = require('../models')
 
 class controller {
     static async register(req, res, next) {
@@ -8,7 +8,7 @@ class controller {
             const response = await User.create({
                 email: req.body.email,
                 password: req.body.password,
-                role: req.body.role
+                role: 'customer'
             }) 
             res.status(201).send({id: response.id, email:response.email, role:response.role})
         } catch (error) {
@@ -29,6 +29,59 @@ class controller {
             const payload = {id: response.id, email:response.email, role:response.role}
             const access_token = jwtSign(payload)
             res.status(200).send({access_token})
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async postTravel(req, res, next) {
+        try {
+            const { name, summary, date, imageUrl } = req.body
+            const response = await TravelPost.create({
+                name, summary, date, imageUrl, userId: req.payload.id
+            })
+            res.send(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async postEvents(req, res, next) {
+        try {
+            const travelData = await TravelPost.findOne({where: {id: req.params.travelPostId}})
+            if (!travelData) throw {name:'Data not found'}
+            const { destination, imageUrl, schedule, price } = req.body
+            const {travelPostId} = req.params
+            const response = await Event.create({
+                destination, imageUrl, schedule, price, travelPostId
+            })
+            res.send(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async getTravelPosts(req, res, next) {
+        try {
+            const response = await TravelPost.findAll({
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+            })
+            res.status(200).send(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+    static async getTravelPostsById(req, res, next) {
+        try {
+            const response = await TravelPost.findOne({
+                where: {id: req.params.id},
+                include: {
+                    model: Event
+                },
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+            })
+            if(!response) throw {name: 'Data not found'}
+            res.status(200).send(response)
         } catch (error) {
             next(error)
         }
