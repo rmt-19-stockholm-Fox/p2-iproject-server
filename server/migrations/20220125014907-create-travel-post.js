@@ -9,19 +9,29 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      descriptionId: {
-        type: Sequelize.INTEGER
+      detailId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'DescriptionPosts',
+          key: 'id'
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
       summary: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       },
       imageUrl: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
