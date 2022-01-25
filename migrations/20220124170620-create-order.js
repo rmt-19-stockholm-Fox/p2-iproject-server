@@ -20,8 +20,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      customerPhoneNumber:{
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       totalPrice: {
-        llowNull: false,
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       status: {
