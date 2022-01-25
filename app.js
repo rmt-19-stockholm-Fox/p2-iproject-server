@@ -25,6 +25,9 @@ app.use((err,req,res,next)=>{
   } else if(err.name === 'PASSWORD_EMPTY') {
     statusCode = 400;
     errorMsg = "Password is required"
+  } else if(err.name === 'JsonWebTokenError' || err.name === 'INVALID_TOKEN') {
+    statusCode = 401;
+    errorMsg = "Invalid token"
   }
 
   res.status(statusCode).json({
