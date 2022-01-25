@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -11,14 +11,23 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+    const data = require("../db/answers.json")
+
+    data.forEach(el => {
+      el.createdAt = new Date()
+      el.updatedAt = new Date()
+    })
+
+    await queryInterface.bulkInsert("Answers", data)
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete("Answers", null)
   }
 };
