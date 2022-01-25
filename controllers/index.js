@@ -1,4 +1,4 @@
-const { User, Post } = require('../models');
+const { User } = require('../models');
 const gAuth = require('../helpers/google-auth');
 const uuid = require('../helpers/uuid');
 const jwt = require('../helpers/jwt');
@@ -40,50 +40,6 @@ module.exports = {
       next(err);
     }
   },
-
-  async createPost(req, res, next) {
-    try {
-      const post = await Post.create({
-        content: req.body.content,
-        UserId: req.user.id
-      });
-
-      res.json({
-        id: post.id,
-        createdAt: post.createdAt
-      });
-    } catch(err) {
-      next(err);
-    }
-  },
-
-  async getPosts(req, res, next) {
-    try {
-      const posts = await Post.findAll({
-        order: [['createdAt', 'DESC']]
-      });
-
-      res.json(posts);
-    } catch(err) {
-      next(err);
-    }
-  },
-
-  async deletePost(req, res, next) {
-    try {
-      const deletedCount = await Post.destroy({
-        where: { id: req.params.id }
-      });
-
-      if (deletedCount === 0) {
-        throw { name: 'NotFound' };
-      }
-
-      res.json({
-        message: 'post has been deleted'
-      });
-    } catch(err) {
-      next(err);
-    }
-  }
+  
+  ...require('./post')
 }
