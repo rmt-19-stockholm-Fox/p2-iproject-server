@@ -22,9 +22,6 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {msg: 'Name cannot be empty'}
       }
     },
-    detailId: {
-      type: DataTypes.INTEGER,
-    },
     summary: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -48,6 +45,9 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {msg: 'ImageUrl cannot be empty'},
         notNull: {msg: 'ImageUrl cannot be empty'}
       }
+    },
+    userId: {
+      type:DataTypes.INTEGER
     }
   }, {
     sequelize,

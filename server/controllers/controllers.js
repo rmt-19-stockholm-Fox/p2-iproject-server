@@ -1,6 +1,6 @@
 const { comparePassword } = require('../helpers/bcrypt')
 const { jwtSign } = require('../helpers/jwt')
-const { User } = require('../models')
+const { User, TravelPost } = require('../models')
 
 class controller {
     static async register(req, res, next) {
@@ -29,6 +29,18 @@ class controller {
             const payload = {id: response.id, email:response.email, role:response.role}
             const access_token = jwtSign(payload)
             res.status(200).send({access_token})
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async postTravel(req, res, next) {
+        try {
+            const { name, summary, date, imageUrl } = req.body
+            const response = await TravelPost.create({
+                name, summary, date, imageUrl, userId: req.payload.id
+            })
+            res.send(response)
         } catch (error) {
             next(error)
         }
