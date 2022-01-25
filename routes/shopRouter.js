@@ -13,10 +13,35 @@ shopRouter.post('/register', async(req,res,next)=>{
       motto : motto,
       address : address,
       category : category,
-      userId: req.currentUser.id,
+      userId: req.currentUser.userId,
     })
 
     res.status(201).json(newShop)
+  } catch (error) {
+    console.log(error);
+    next(error)
+  }
+})
+
+shopRouter.put('/edit', async(req,res,next) =>{
+  try {
+    const {name, imageUrl, motto, address, category} = req.body;
+
+    await Shop.update({
+      name,
+      imageUrl,
+      motto,
+      address,
+      category,
+    },{
+      where: {
+        userId: req.currentUser.userId
+      }
+    })
+
+    res.status(200).json({
+      message: `Shop update success`
+    });
   } catch (error) {
     console.log(error);
     next(error)
