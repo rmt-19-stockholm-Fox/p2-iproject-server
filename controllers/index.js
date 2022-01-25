@@ -67,5 +67,23 @@ module.exports = {
     } catch(err) {
       next(err);
     }
+  },
+
+  async deletePost(req, res, next) {
+    try {
+      const deletedCount = await Post.destroy({
+        where: { id: req.params.id }
+      });
+
+      if (deletedCount === 0) {
+        throw { name: 'NotFound' };
+      }
+
+      res.json({
+        message: 'post has been deleted'
+      });
+    } catch(err) {
+      next(err);
+    }
   }
 }
