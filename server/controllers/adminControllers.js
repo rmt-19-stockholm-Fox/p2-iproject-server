@@ -22,7 +22,18 @@ class adminController {
             const response = await Event.create({
                 destination, imageUrl, schedule, price, travelPostId
             })
-            res.send(response)
+            res.status(200).send(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async getEvents(req, res, next) {
+        try {
+            const travelData = await TravelPost.findOne({where: {id: req.params.travelPostId}})
+            if (!travelData) throw {name:'Data not found'}
+            const response = await Event.findAll({where: {travelPostId: req.params.travelPostId}})
+            res.status(200).send(response)
         } catch (error) {
             next(error)
         }
