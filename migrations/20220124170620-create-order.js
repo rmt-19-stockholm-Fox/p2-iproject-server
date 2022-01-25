@@ -16,7 +16,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      orderDestionation:{
+      orderDestination:{
         allowNull: false,
         type: Sequelize.STRING,
       },
