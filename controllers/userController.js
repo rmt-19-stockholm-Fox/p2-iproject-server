@@ -1,6 +1,7 @@
 const { User, Mutual, Notification } = require("../models");
 const { createToken } = require("../helpers/jwt");
 const { compareHash } = require("../helpers/bcrypt");
+const { Op } = require("sequelize");
 
 class UserController {
   static async postRegister(req, res, next) {
@@ -108,6 +109,30 @@ class UserController {
       });
       res.status(200).json(findNotification);
     } catch (err) {
+      next(err);
+    }
+  }
+  static async getMutualList(req, res, next) {
+    try {
+      const id = req.params.userId;
+      const findUser = await User.findByPk(id);
+      if (!findUser) {
+        throw { name: "UserNotFound" };
+      }
+      const mutualList = await Mutual.findAll({
+        where: {
+          [Op.and]: [
+            { status: "Mutuals" },
+            { [Op.or]: [{ firstUser: id }, { secondUser: id }] },
+          ],
+        },
+        include: {
+          model: User,
+        },
+      });
+      res.status(200).json(mutualList);
+    } catch (err) {
+      console.log(err);
       next(err);
     }
   }
