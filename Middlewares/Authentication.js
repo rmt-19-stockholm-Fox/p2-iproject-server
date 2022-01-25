@@ -14,7 +14,7 @@ const Authentication = async(req,res,next)=>{
     }
 
     req.currentUser = {
-      id: user.id,
+      userId: user.id,
       email: user.email
     }
 
