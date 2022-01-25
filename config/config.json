@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "cirebon123",
-    "database": "RENT",
+    "database": "EXPO",
     "host": "localhost",
     "dialect": "postgres"
   },
