@@ -37,7 +37,7 @@ productRouter.put('/edit/:productId', async(req,res,next) => {
       }
     })
     res.status(200).json({
-      message: "Product update success"
+      message: "Product update success!"
     })
   } catch (error) {
     next(error)
