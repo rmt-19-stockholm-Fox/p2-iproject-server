@@ -1,0 +1,182 @@
+[
+  {
+    "id": 0,
+    "question": "What is the name of the continent on which most of the action of \"Game of Thrones\" takes place?",
+    "correctAnswer": "Westeros",
+    "difficulty": "easy"
+  },
+  {
+    "id": 1,
+    "question": "At the end of season 2, Joffrey Baratheon sits on the Iron Throne, but which Baratheon is actually the rightful king?",
+    "correctAnswer": "Stannis Baratheon",
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "question": "In 2011, which actor who plays Tyrion Lannister, won the Golden Globe award for Best Performance by an Actor in a Supporting Role in a Series?",
+    "correctAnswer": "Peter Dinklage",
+    "difficulty": "easy"
+  },
+  {
+    "id": 3,
+    "question": "Aside from being Master of Coin and a member of the King's Small Council, the character of Peter \"Littlefinger\" Baelish from King's Landing also runs what kind of business?",
+    "correctAnswer": "Brothel",
+    "difficulty": "easy"
+  },
+  {
+    "id": 4,
+    "question": "What is the name of Arya Stark's sword?",
+    "correctAnswer": "Needle",
+    "difficulty": "easy"
+  },
+  {
+    "id": 5,
+    "question": "By what name do the Seven Kingdoms refer to the Free Folk who live in north beyond the Wall?",
+    "correctAnswer": "Wildlings",
+    "difficulty": "easy"
+  },
+  {
+    "id": 6,
+    "question": "Which of the following is not a position on King Joffrey Baratheon's small council?",
+    "correctAnswer": "Master of Seas",
+    "difficulty": "easy"
+  },
+  {
+    "id": 7,
+    "question": "Which position on the king's small council is his closest adviser and has the power to make decisions in the king's absence?",
+    "correctAnswer": "Hand of the King",
+    "difficulty": "easy"
+  },
+  {
+    "id": 8,
+    "question": "For what reason was Hand of the King Eddard (Ned) Stark executed?",
+    "correctAnswer": "Challenging Joffrey's right to be king",
+    "difficulty": "easy"
+  },
+  {
+    "id": 9,
+    "question": "Daenerys Targaryen has three children. These \"children\" are actually what?",
+    "correctAnswer": "Dragons",
+    "difficulty": "easy"
+  },
+  {
+    "id": 10,
+    "question": "It was Jon Arryn's sudden death that brought Ned Stark to King's Landing, where he sought the truth behind Lord Arryn's demise. Who actually killed Robert's first \"Hand of the King?\"",
+    "correctAnswer": "Lysa Arryn",
+    "difficulty": "medium"
+  },
+  {
+    "id": 11,
+    "question": "What nasty creature felled a drunken King Robert?",
+    "correctAnswer": "Boar",
+    "difficulty": "medium"
+  },
+  {
+    "id": 12,
+    "question": "On the orders of King Joffrey, Ilyn Payne beheads Ned Stark with which ancient sword?",
+    "correctAnswer": "Ice",
+    "difficulty": "medium"
+  },
+  {
+    "id": 13,
+    "question": "Sansa Stark and Tyrion Lannister were suspected of poisoning King Joffrey. Who, however, really did the little monster in?",
+    "correctAnswer": "Olenna Tyrell",
+    "difficulty": "medium"
+  },
+  {
+    "id": 14,
+    "question": "Each night before sleep Arya Stark speaks the names of those she wishes dead. Who wasn't on little Arya's original \"hit list?\"",
+    "correctAnswer": "Walder Frey",
+    "difficulty": "medium"
+  },
+  {
+    "id": 15,
+    "question": "The \"Red Wedding\" claimed the lives of many a Stark. Which member of that northern clan DIDN'T die as a guest of Walder Frey?",
+    "correctAnswer": "Benjen Stark",
+    "difficulty": "medium"
+  },
+  {
+    "id": 16,
+    "question": "Which brother of the Night's Watch brought an end to Ygritte and (temporarily) Jon Snow?",
+    "correctAnswer": "Olly",
+    "difficulty": "medium"
+  },
+  {
+    "id": 17,
+    "question": "If the Night's Watch is a brotherhood, Jon Snow is guilty of serial fratricide. Who amongst these black brothers was not slain by \"Lord Snow?\"",
+    "correctAnswer": "Jeor Mormont",
+    "difficulty": "medium"
+  },
+  {
+    "id": 18,
+    "question": "Oberyn Martell died championing Tyrion Lannister in a \"trial by combat.\" By what nickname was his killer known?",
+    "correctAnswer": "The Mountain",
+    "difficulty": "medium"
+  },
+  {
+    "id": 19,
+    "question": "The fiery sacrifice of Shireen Baratheon may have been the cruelest death on a show famous for such things. Who amongst the following was NOT complicit in the princess' haunting end?",
+    "correctAnswer": "Davos Seaworth",
+    "difficulty": "medium"
+  },
+  {
+    "id": 20,
+    "question": "In season 2, who does Tyrion tell Varys he is planning on marrying to Princess Myrcella?",
+    "correctAnswer": "Theon Greyjoy",
+    "difficulty": "hard"
+  },
+  {
+    "id": 21,
+    "question": "Which of the following characters DOES appear in season 1?",
+    "correctAnswer": "Beric Dondarrion",
+    "difficulty": "hard"
+  },
+  {
+    "id": 22,
+    "question": "Who attempts to kill Tyrion on the battlefield in the Battle of Blackwater Bay?",
+    "correctAnswer": "Ser Mandon Moore",
+    "difficulty": "hard"
+  },
+  {
+    "id": 23,
+    "question": "Which of the following types of wine does the wine merchant attempt to poison Daenerys with?",
+    "correctAnswer": "Arbor Red",
+    "difficulty": "hard"
+  },
+  {
+    "id": 24,
+    "question": "What is Daenerys' response to Kraznys mo Nakloz after he tells Missandei to tell Daenerys that her \"beast won't come\" to him after the exchange of Drogon for the army of Unsullied?",
+    "correctAnswer": "\"A dragon is not a slave\"",
+    "difficulty": "hard"
+  },
+  {
+    "id": 25,
+    "question": "What is the first thing Jon Snow says in the first episode in season 4?",
+    "correctAnswer": "\"Last time I saw him, he was in the courtyard at Winterfell\".",
+    "difficulty": "hard"
+  },
+  {
+    "id": 26,
+    "question": "What is the name of the man that Arya kills in season 4 after he tries to kill The Hound due to the bounty on The Hound's head?",
+    "correctAnswer": "Rorge",
+    "difficulty": "hard"
+  },
+  {
+    "id": 27,
+    "question": "What were Tywin Lannister's last words before Tyrion killed him?",
+    "correctAnswer": "\"You're no son of mine\".",
+    "difficulty": "hard"
+  },
+  {
+    "id": 28,
+    "question": "Which of the following are NOT one of the daughters/granddaughters of Walder Frey that Robb Stark could have chosen to marry?",
+    "correctAnswer": "Waldina",
+    "difficulty": "hard"
+  },
+  {
+    "id": 29,
+    "question": "How many Starks appeared in the first episode of season 1 (pilot episode)?",
+    "correctAnswer": "8",
+    "difficulty": "hard"
+  }
+]

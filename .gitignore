@@ -1,2 +1,17 @@
 node_modules
 .vscode
+
+npx sequelize-cli model:generate --name User --attributes email:string,password:string,username:string,profilePicture:string,points:integer
+
+
+
+
+
+
+
+
+
+
+
+
+
