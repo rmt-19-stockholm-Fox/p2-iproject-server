@@ -8,7 +8,7 @@ userRouter.post("/login", userController.login); //login user
 userRouter.use(authentication);
 userRouter.get("/notification/:userId", userController.notification); //tampilin notifikasi khusus untuk user dengan id = userId
 userRouter.get("/profileDetail/:userId", userController.profileDetail); //tampilin profile user dengan id = userId
-userRouter.get("/mutualList/:userId", userController.getMutualList);
+userRouter.get("/mutualList/:userId", userController.getMutualList); //mendaptkan list mutual
 userRouter.post("/addMutual/:mutualId", userController.postMutual); //mengadd atau tambah teman baru, mutualId itu id dari teman yang mau dijadikan mutual
 userRouter.use(mutualAuthorization);
 userRouter.patch("/confirmMutual/:mutualId", userController.confirmMutual); //mengubah status dari "Requested" menjadi Mutuals, menerima pertemanan

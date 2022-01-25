@@ -1,4 +1,5 @@
 const { Diary, User, Tag } = require("../models");
+const { Op } = require("sequelize");
 
 class DiaryController {
   static async createDiary(req, res, next) {
@@ -18,11 +19,35 @@ class DiaryController {
   }
   static async getDiary(req, res, next) {
     try {
-      const diary = await Diary.findAll({
-        where: { UserId: req.currentUser.id },
-      });
+      const findTitle = req.query.title;
+      const findTag = +req.query.tagId;
+      let findQuery = {
+        order: [["createdAt", "DESC"]],
+      };
+
+      if (findTitle) {
+        findQuery.where = {
+          UserId: req.currentUser.id,
+          title: {
+            [Op.iLike]: `%${findTitle}%`,
+          },
+        };
+      } else if (findTag) {
+        findQuery.where = {
+          UserId: req.currentUser.id,
+          TagId: {
+            [Op.eq]: findTag,
+          },
+        };
+      } else {
+        findQuery.where = {
+          UserId: req.currentUser.id,
+        };
+      }
+      const diary = await Diary.findAll(findQuery);
       res.status(200).json(diary);
     } catch (err) {
+      console.log(err);
       next(err);
     }
   }
