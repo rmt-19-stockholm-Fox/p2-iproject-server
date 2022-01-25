@@ -16,6 +16,7 @@ app.post('/login' ,controller.login)
 
 app.use(authorization)
 app.post('/travel' ,controller.postTravel)
+app.post('/events/:travelPostId' ,controller.postEvents)
 
 app.use(errorHandler)
 
