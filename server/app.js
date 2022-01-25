@@ -6,6 +6,8 @@ const cors = require('cors')
 const { controller } = require('./controllers/controllers')
 const errorHandler = require('./middlewares/errorHandles')
 const authorization = require('./middlewares/authorization')
+const { adminController } = require('./controllers/adminControllers')
+const { customerController } = require('./controllers/customerControllers')
 
 app.use(cors())
 app.use(express.json())
@@ -15,8 +17,11 @@ app.post('/register' ,controller.register)
 app.post('/login' ,controller.login)
 
 app.use(authorization)
-app.post('/travel' ,controller.postTravel)
-app.post('/events/:travelPostId' ,controller.postEvents)
+app.post('/travel' ,adminController.postTravel)
+app.post('/events/:travelPostId' ,adminController.postEvents)
+
+app.post('/bookings/:postId', customerController.postBooking)
+app.get('/bookings', customerController.getBooking)
 
 app.use(errorHandler)
 
