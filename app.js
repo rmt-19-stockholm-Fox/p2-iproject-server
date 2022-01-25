@@ -4,7 +4,7 @@ const port = 3000
 
 app.post('/register', async (req, res, next) => {
   try {
-    
+    const {email, password} = req.body
   } catch (error) {
     next(error)
   }
