@@ -1,6 +1,6 @@
 const { comparePassword } = require('../helpers/bcrypt')
 const { jwtSign } = require('../helpers/jwt')
-const { User, TravelPost } = require('../models')
+const { User, TravelPost, Event } = require('../models')
 
 class controller {
     static async register(req, res, next) {
@@ -39,6 +39,21 @@ class controller {
             const { name, summary, date, imageUrl } = req.body
             const response = await TravelPost.create({
                 name, summary, date, imageUrl, userId: req.payload.id
+            })
+            res.send(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async postEvents(req, res, next) {
+        try {
+            const travelData = await TravelPost.findOne({where: {id: req.params.travelPostId}})
+            if (!travelData) throw {name:'Data not found'}
+            const { destination, imageUrl, schedule, price } = req.body
+            const {travelPostId} = req.params
+            const response = await Event.create({
+                destination, imageUrl, schedule, price, travelPostId
             })
             res.send(response)
         } catch (error) {
