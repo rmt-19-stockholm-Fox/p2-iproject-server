@@ -1,0 +1,38 @@
+{
+  "name": "p2-iproject-server-1",
+  "version": "1.0.0",
+  "description": "Individual Project - Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satriopriambodo/p2-iproject-server-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/satriopriambodo/p2-iproject-server-1/issues"
+  },
+  "homepage": "https://github.com/satriopriambodo/p2-iproject-server-1#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "base-64": "^1.0.0",
+    "bcrypt": "^5.0.1",
+    "buffer": "^6.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^12.0.3",
+    "express": "^4.17.2",
+    "form-data": "^4.0.0",
+    "imagekit-javascript": "^1.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.4",
+    "pg": "^8.7.1",
+    "sequelize": "^6.13.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.0"
+  }
+}
