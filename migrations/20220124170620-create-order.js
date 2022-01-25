@@ -18,15 +18,15 @@ module.exports = {
       },
       orderDestionation:{
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       customerPhoneNumber:{
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       totalPrice: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       status: {
         allowNull: false,

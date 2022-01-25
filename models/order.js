@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     orderDestionation: DataTypes.STRING,
     customerPhoneNumber:DataTypes.INTEGER,
     totalPrice: DataTypes.INTEGER,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Order',
