@@ -40,6 +40,22 @@ module.exports = {
       next(err);
     }
   },
+
+  async getUserById(req, res, next) {
+    try {
+      const user = await User.findByPk(req.params.id, {
+        attributes: ['name', 'email']
+      });
+
+      if (!user) {
+        throw { name: 'NotFound' };
+      }
+
+      res.json(user);
+    } catch(err) {
+      next(err);
+    }
+  },
   
   ...require('./post'),
   ...require('./place')

@@ -4,6 +4,7 @@ const auth = require('../middlewares/authentication');
 const uploader = require('../middlewares/images-uploader');
 
 router.post('/login-google', controller.loginGoogle);
+router.get('/users/:id', controller.getUserById);
 router.post('/user', controller.getUserByToken);
 router.post('/posts', auth, uploader, controller.createPost);
 router.get('/posts', controller.getPosts);
