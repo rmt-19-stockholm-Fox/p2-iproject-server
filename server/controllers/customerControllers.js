@@ -6,7 +6,7 @@ const { Booking, TravelPost, User, Event, Transaction } = require('../models')
 class customerController {
     static async postBooking(req, res, next) {
         try {
-            const travelData = await TravelPost.findOne({ 
+            const travelData = await TravelPost.findOne({
                 where: { id: req.params.postId },
                 include: {
                     model: Event
@@ -14,9 +14,11 @@ class customerController {
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
             if (!travelData) throw { name: 'Data not found' }
+            const amount = priceCalculating(travelData.Events)
             const response = await Booking.create({
                 userId: req.payload.id,
-                postId: req.params.postId
+                postId: req.params.postId,
+                amount: amount
             })
             nodemailerSend(req.payload.email, 'nama', travelData)
             res.status(200).send(response)
@@ -44,9 +46,23 @@ class customerController {
     }
     static async midtrans(req, res, next) {
         try {
-            const response = await Transaction.create({amount:req.body.amount, userId: req.payload.id, status:false})
-            const data = await midtrans(response.id, req.body.amount, req.payload.email)
-            res.status(200).send({token: data.token})
+            console.log(req.body.postId)
+            const postId = req.body.postId
+            const response = await Booking.findOne({where:{postId: postId, userId: req.payload.id}})
+            if(!response) throw {name:'Data not found'}
+            const data = await midtrans(response.id, response.amount, req.payload.email)
+            res.status(200).send({ token: data.token, bookingId: response.id })
+        } catch (error) {
+            next(error)
+        }
+    }
+    static async patchSuccessPayment(req, res, next) {
+        try {
+            const response = await Booking.update(
+                { paymentStatus: true },
+                { where: { id: req.body.id } }
+            )
+            res.status(200).send(response)
         } catch (error) {
             next(error)
         }

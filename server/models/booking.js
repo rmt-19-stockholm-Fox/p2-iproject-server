@@ -17,7 +17,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Booking.init({
     userId: DataTypes.INTEGER,
-    postId: DataTypes.INTEGER
+    postId: DataTypes.INTEGER,
+    amount: {
+      type: DataTypes.INTEGER
+    },
+    paymentStatus: {
+      type: DataTypes.BOOLEAN,
+      default: false
+    },
   }, {
     sequelize,
     modelName: 'Booking',

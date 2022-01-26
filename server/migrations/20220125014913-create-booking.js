@@ -26,6 +26,12 @@ module.exports = {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       },
+      amount: {
+        type: Sequelize.INTEGER
+      },
+      paymentStatus: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -18,5 +18,6 @@ router.get('/events/:travelPostId', authenticationAdmin, adminController.getEven
 router.post('/bookings/:postId', authenticationCustomer, customerController.postBooking)
 router.get('/bookings', authenticationCustomer, customerController.getBooking)
 router.post('/midtrans', authenticationCustomer, customerController.midtrans)
+router.post('/successpayment', customerController.patchSuccessPayment)
 
 module.exports = router
