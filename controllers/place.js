@@ -55,21 +55,6 @@ module.exports = {
 
       res.set('Content-Type', 'image/jpeg');
       res.end(Buffer.from(response.data, 'binary'));
-      
-      // res.json({
-      //   data: Buffer.from(response.data, 'binary').toString('base64')
-      // });
-      // console.log(response.headers);
-
-      // res.sendFile();
-      
-      // Object.keys(response.headers).forEach(key => {
-      //   res.set(key, response.headers[key]);
-      // });
-
-      // res.send(response.data);
-      
-      // res.end(response.data, 'binary');
     } catch(err) {
       next(err);
     }
