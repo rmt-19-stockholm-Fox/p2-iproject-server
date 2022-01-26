@@ -1,6 +1,7 @@
 function errorHandler(err, req, res, next) {
     res.send(err)
     if (err.name === 'Data not found') res.status(404).send({message: 'Data not found'})
+    if (err.name === 'Unauthorized') res.status(401).send({message: 'Unauthorized'})
     if (err.name === 'JsonWebTokenError') res.status(401).send({message: 'Invalid Token'})
     if (err.name === 'Invalid Token') res.status(401).send({message: 'Invalid Token'})
     if (err.name === 'Invalid email/password') res.status(403).send({message: 'Invalid email/password'})

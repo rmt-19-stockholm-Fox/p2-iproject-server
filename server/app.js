@@ -3,31 +3,58 @@ const express = require('express')
 const app = express()
 const port = 4000
 const cors = require('cors')
-const { controller } = require('./controllers/controllers')
 const errorHandler = require('./middlewares/errorHandles')
-const authorization = require('./middlewares/authorization')
-const { adminController } = require('./controllers/adminControllers')
-const { customerController } = require('./controllers/customerControllers')
+const route = require('./routes')
+const { createServer } = require('http')
+const { Server } = require('socket.io')
+const { jwtVerify } = require('./helpers/jwt')
+const httpServer = createServer(app)
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.post('/register' ,controller.register)
-app.post('/login' ,controller.login)
+let arrOfUser = []
+let arrOfChats = []
 
-app.use(authorization)
-app.post('/travel' ,adminController.postTravel)
-app.get('/travel' ,controller.getTravelPosts)
-app.get('/travel/:id', controller.getTravelPostsById)
-app.post('/events/:travelPostId' ,adminController.postEvents)
-app.get('/events/:travelPostId' ,adminController.getEvents)
-
-app.post('/bookings/:postId', customerController.postBooking)
-app.get('/bookings', customerController.getBooking)
-
-app.use(errorHandler)
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*"
+  }
 })
+
+app.use(route, errorHandler)
+
+io.on('connection', (socket) => {
+  console.log('A User Connect', socket.id)
+  socket.on('disconnect', () => {
+    console.log('A user disconnect')
+  })
+  socket.on("forRefresh", (payload) => {
+    socket.emit('receiveMessageFromServer', arrOfChats)
+  })
+  socket.on("setUsername", (payload) => {
+    arrOfUser.push({
+      username: payload,
+      status: 'online'
+    })
+  })
+  socket.on('sendMessageToServer', (payload => {
+    const access_token = payload.access_token
+    const payloadtoken = jwtVerify(access_token)
+    const pushThis = {
+      message: payload.message,
+      email: payloadtoken.email,
+      role: payloadtoken.role
+    }
+    arrOfChats.push(pushThis)
+    io.emit('RECMESSERVER', arrOfChats)
+  }))
+})
+
+
+httpServer.listen(port, () => {
+  console.log('listening on port ' + port)
+})
+
+module.exports = app

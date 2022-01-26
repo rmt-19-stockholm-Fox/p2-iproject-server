@@ -1,5 +1,7 @@
+const midtrans = require('../helpers/midtrans')
 const nodemailerSend = require('../helpers/nodemailer')
-const { Booking, TravelPost, User, Event } = require('../models')
+const priceCalculating = require('../helpers/priceCalculating')
+const { Booking, TravelPost, User, Event, Transaction } = require('../models')
 
 class customerController {
     static async postBooking(req, res, next) {
@@ -36,6 +38,15 @@ class customerController {
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
             res.status(200).send(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+    static async midtrans(req, res, next) {
+        try {
+            const response = await Transaction.create({amount:req.body.amount, userId: req.payload.id, status:false})
+            const data = await midtrans(response.id, req.body.amount, req.payload.email)
+            res.status(200).send({token: data.token})
         } catch (error) {
             next(error)
         }

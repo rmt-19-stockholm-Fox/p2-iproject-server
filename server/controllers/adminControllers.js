@@ -15,12 +15,14 @@ class adminController {
 
     static async postEvents(req, res, next) {
         try {
+            const dateFormat = new Date (req.body.schedule)
+            console.log(dateFormat)
             const travelData = await TravelPost.findOne({where: {id: req.params.travelPostId}})
             if (!travelData) throw {name:'Data not found'}
-            const { destination, imageUrl, schedule, price } = req.body
+            const { destination, imageUrl, price } = req.body
             const {travelPostId} = req.params
             const response = await Event.create({
-                destination, imageUrl, schedule, price, travelPostId
+                destination, imageUrl, schedule: dateFormat , price, travelPostId
             })
             res.status(200).send(response)
         } catch (error) {

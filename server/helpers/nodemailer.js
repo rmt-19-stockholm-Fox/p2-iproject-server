@@ -9,7 +9,6 @@ const priceCalculating = require("./priceCalculating");
 
 async function nodemailerSend(email, name, data) {
   const totalPrice = priceCalculating(data.Events)
-  console.log(totalPrice)
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
