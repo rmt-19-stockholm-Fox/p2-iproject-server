@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { getStorage } = require('firebase-admin/storage');
-const { Post } = require('../models');
+const { User, Post } = require('../models');
 const bucket = getStorage().bucket();
 
 module.exports = {
@@ -43,9 +43,30 @@ module.exports = {
 
   async getPosts(req, res, next) {
     try {
-      const posts = await Post.findAll({
+      const options = {
+        where: {},
+        include: [
+          {
+            model: User,
+            attributes: ['id', 'name']
+          }
+        ],
         order: [['createdAt', 'DESC']]
-      });
+      };
+
+      if (req.query.userId) {
+        options.where.UserId = req.query.userId;
+      }
+
+      if (req.query.placeId) {
+        options.where.placeId = req.query.placeId;
+      }
+
+      if (req.query.excludeUser) {
+        delete options.include;
+      }
+
+      const posts = await Post.findAll(options);
 
       res.json(posts);
     } catch(err) {

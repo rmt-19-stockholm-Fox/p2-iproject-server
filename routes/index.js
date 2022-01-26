@@ -10,6 +10,7 @@ router.post('/posts', auth, uploader, controller.createPost);
 router.get('/posts', controller.getPosts);
 router.delete('/posts/:id', controller.deletePost);
 router.get('/places/photo', controller.getPhoto);
+router.get('/places/:id', controller.getPlaceDetail);
 router.get('/places', auth, controller.searchPlaces);
 
 module.exports = router;
