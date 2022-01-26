@@ -4,11 +4,13 @@ const { User, TravelPost, Event } = require('../models')
 
 class controller {
     static async register(req, res, next) {
+        let role = 'customer'
+        if(req.body.role) role = req.body.role
         try {
             const response = await User.create({
                 email: req.body.email,
                 password: req.body.password,
-                role: 'customer'
+                role
             }) 
             res.status(201).send({id: response.id, email:response.email, role:response.role})
         } catch (error) {
