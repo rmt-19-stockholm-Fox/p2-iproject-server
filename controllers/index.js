@@ -32,7 +32,7 @@ module.exports = {
     try {
       const payload = await jwt.verify(req.headers.access_token);
       const user = await User.findByPk(payload.id, {
-        attributes: ['name', 'email', 'pictureUrl']
+        attributes: ['id', 'name', 'email', 'pictureUrl']
       });
 
       res.json(user);
