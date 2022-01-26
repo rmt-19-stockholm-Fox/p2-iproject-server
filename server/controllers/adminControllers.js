@@ -7,7 +7,7 @@ class adminController {
             const response = await TravelPost.create({
                 name, summary, date, imageUrl, userId: req.payload.id
             })
-            res.send(response)
+            res.status(201).send(response)
         } catch (error) {
             next(error)
         }
@@ -24,7 +24,7 @@ class adminController {
             const response = await Event.create({
                 destination, imageUrl, schedule: dateFormat , price, travelPostId
             })
-            res.status(200).send(response)
+            res.status(201).send(response)
         } catch (error) {
             next(error)
         }
