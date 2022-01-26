@@ -41,5 +41,6 @@ module.exports = {
     }
   },
   
-  ...require('./post')
+  ...require('./post'),
+  ...require('./place')
 }
