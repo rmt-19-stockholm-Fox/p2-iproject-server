@@ -2,6 +2,7 @@ const { default: axios } = require('axios');
 
 const TEXT_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
 const PHOTO_URL = 'https://maps.googleapis.com/maps/api/place/photo';
+const PLACE_DETAIL_URL = 'https://maps.googleapis.com/maps/api/place/details/json';
 const CACHE = require('../helpers/cache')();
 
 module.exports = {
@@ -55,6 +56,22 @@ module.exports = {
 
       res.set('Content-Type', 'image/jpeg');
       res.end(Buffer.from(response.data, 'binary'));
+    } catch(err) {
+      next(err);
+    }
+  },
+
+  async getPlaceDetail(req, res, next) {
+    try {
+      const { data } = await axios.get(PLACE_DETAIL_URL, {
+        params: {
+          place_id: req.params.id,
+          fields: 'photos,name,formatted_address,icon',
+          key: process.env.GPLACES_API_KEY
+        }
+      });
+
+      res.json(data.result);
     } catch(err) {
       next(err);
     }
