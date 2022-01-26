@@ -28,7 +28,7 @@ class controller {
             if(!isValid) throw {name: 'Invalid email/password'}
             const payload = {id: response.id, email:response.email, role:response.role}
             const access_token = jwtSign(payload)
-            res.status(200).send({access_token})
+            res.status(200).send({access_token, email: response.email, role: response.role})
         } catch (error) {
             next(error)
         }
