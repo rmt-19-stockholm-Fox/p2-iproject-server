@@ -1,12 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-
 const { getStorage } = require('firebase-admin/storage');
 const { Post } = require('../models');
-
 const bucket = getStorage().bucket();
 
-function deleteFile(file) {
+function cleanTempFile(file) {
   return new Promise((resolve, reject) => {
     fs.unlink(path.join(__dirname, `../uploads/${file.filename}`), err => {
       if (err) reject(err)
@@ -15,17 +13,54 @@ function deleteFile(file) {
   });
 }
 
-function uploadFile(postId, file, index) {
+function makePublic(postId) {
+  const options = {
+    prefix: `posts/${postId}/`
+  };
+  
+  return new Promise((resolve, reject) => {
+    bucket.getFiles(options, (err, files) => {
+      if (err) return reject(err);
+
+      Promise.all(files.map(file => file.makePublic()))
+        .then(() => resolve())
+        .catch(reject);
+    });
+  });
+}
+
+async function uploadFile(postId, file, index) {
   const options = {
     destination: `posts/${postId}/img-${index}${path.extname(file.filename)}`,
     validation: 'crc32c',
+    resumable: true,
     public: true
   };
 
   return new Promise((resolve, reject) => {
-    bucket.upload(file.path, options, (err, file) => {
-      if (err) reject(err)
-      else resolve(file.publicUrl());
+    bucket.upload(path.join(__dirname, `../uploads/${file.filename}`), options, (err, file) => {
+      if (err) return reject(err)
+      
+      file.makePublic((err, resp) => {
+        if (err) reject(err)
+        else resolve(file.publicUrl());
+      })
+    });
+  });
+}
+
+function deleteUploadedFiles(postId) {
+  const options = {
+    prefix: `posts/${postId}/`
+  }
+
+  return new Promise((resolve, reject) => {
+    bucket.getFiles(options, (err, files) => {
+      if (err) return reject(err);
+
+      Promise.all(files.map(file => file.delete()))
+        .then(() => resolve())
+        .catch(reject);
     });
   });
 }
@@ -44,8 +79,16 @@ module.exports = {
         const file = req.files[i];
         const fileUrl = await uploadFile(post.id, file, i+1);
         images.push(fileUrl);
-        await deleteFile(file);
+        await cleanTempFile(file);
       }
+
+      await Post.update({
+        imageUrls: images.join(';')
+      }, {
+        where: { id: post.id }
+      });
+
+      await makePublic(post.id);
 
       res.json({
         id: post.id,
@@ -63,6 +106,8 @@ module.exports = {
         order: [['createdAt', 'DESC']]
       });
 
+      // await makePublic(posts[0].id);
+
       res.json(posts);
     } catch(err) {
       next(err);
@@ -71,6 +116,8 @@ module.exports = {
 
   async deletePost(req, res, next) {
     try {
+      await deleteUploadedFiles(req.params.id);
+      
       const deletedCount = await Post.destroy({
         where: { id: req.params.id }
       });
