@@ -5,11 +5,54 @@ class Controller {
   static async findMeTheTime(req, res, next) {
     try {
       const calkey = process.env.CALENDARIFIC_KEY;
-      const { country, forcednum, nmdayoff, year, streak } = req.query;
+      let { country, forcednum, nmdayoff, year, streak } = req.body;
       let spdayoff = [];
       let spdayname = [];
+
+      switch (country.toLowerCase()) {
+        case `afghanistan`:
+          country = `af`;
+          break;
+        case `albania`:
+          country = `al`;
+          break;
+        case `algeria`:
+          country = `dz`;
+          break;
+        case `american samoa`:
+          country = `as`;
+          break;
+        case `andorra`:
+          country = `ad`;
+          break;
+        case `indonesia`:
+          country = `id`;
+          break;
+        case `united kingdom`:
+          country = `gm`;
+          break;
+        case `united sates`:
+          country = `us`;
+          break;
+        case `japan`:
+          country = `jp`;
+          break;
+        case `india`:
+          country = `in`;
+          break;
+        case `russia`:
+          country = `eu`;
+          break;
+        case `japan`:
+          country = `jp`;
+          break;
+        default:
+          throw { name: "Data not found!" };
+          break;
+      }
+
       const result = await axios.get(
-        `https://calendarific.com/api/v2/holidays?api_key=${calkey}&country=${country}&year=${year}`
+        `https://calendarific.com/api/v2/holidays?&api_key=${calkey}&country=${country}&year=${year}`
       );
       result.data.response.holidays.forEach((x) => {
         spdayoff.push(x.date.iso);
@@ -50,6 +93,8 @@ class Controller {
         streak = nmdayoff.length + +forcednum;
       }
 
+      let output = [];
+
       for (let i = 0; i < alldate.length; i++) {
         let inoutput = {
           dates: [],
@@ -85,7 +130,7 @@ class Controller {
 
   static async findMeThePlace(req, res, next) {
     try {
-      let { goingto, maxdistance } = req.query;
+      let { goingto, maxdistance } = req.body;
       const optkey = process.env.OPENTRIP_KEY;
       goingto = goingto.split(" ");
       goingto = goingto.join("%20");
@@ -155,7 +200,7 @@ class Controller {
         data3: displayed3.data,
       });
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 
