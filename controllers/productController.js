@@ -1,4 +1,5 @@
-const { Product, Category, User } = require("../models");
+const { Product, Category, User, Transaction } = require("../models");
+const { format } = require(`../helpers/formatCurrency`);
 // const nodemailer = require('nodemailer')
 
 class Controller {
@@ -74,6 +75,9 @@ class Controller {
     const input = {
       name: req.body.name,
       description: req.body.description,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      summary: req.body.summary,
       image1: null,
       image2: null,
       image3: null,
@@ -135,6 +139,9 @@ class Controller {
     const input = {
       name: req.body.name,
       description: req.body.description,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      summary: req.body.summary,
       image1: req.body.image1,
       image2: req.body.image2,
       image3: req.body.image3,
@@ -174,60 +181,6 @@ class Controller {
         } else {
           res.status(500).json({ message: err.message });
         }
-      });
-  }
-
-  static sendEmail(req, res) {
-    const input = {
-      to: req.body.to,
-      subject: req.body.subject,
-      content: req.body.content,
-    };
-
-    const transporter = nodemailer.createTransport({
-      service: "hotmail",
-      auth: {
-        user: "satriopriambodo@outlook.com",
-        pass: "satrio123",
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
-
-    const options = {
-      from: "satriopriambodo@outlook.com",
-      to: input.to,
-      subject: input.subject,
-      text: input.content,
-    };
-
-    transporter.sendMail(options, (err) => {
-      if (err) {
-        res.status(500).json({ message: "Wrong email or password" });
-        return;
-      } else {
-        res.status(200).json({ message: "Email sent!" });
-      }
-    });
-  }
-
-  static sendSms(req, res) {
-    const accountSid = process.env.ACCOUNT_SID;
-    const authToken = process.env.AUTH_TOKEN;
-    const client = require("twilio")(accountSid, authToken);
-
-    client.messages
-      .create({
-        body: req.body.content,
-        from: "+13867039481",
-        to: "+6281211838896",
-      })
-      .then(() => {
-        res.status(200).json({ message: "Message sent!" });
-      })
-      .catch(() => {
-        res.status(500).json({ message: "Unsuccessful send SMS" });
       });
   }
 }

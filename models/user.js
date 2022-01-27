@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
         through: "Bookmark",
         foreignKey: "UsersId",
       });
+      User.hasMany(models.Transaction, {
+        foreignKey: "UserId",
+      });
     }
   }
   User.init(
@@ -108,8 +111,9 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "User",
       hooks: {
-        beforeCreate: (instance) => {
-          instance.password = hashPassword(instance.password);
+        beforeCreate: (user) => {
+          const salt = bcrypt.genSaltSync(8);
+          user.password = bcrypt.hashSync(user.password, salt);
         },
       },
     }

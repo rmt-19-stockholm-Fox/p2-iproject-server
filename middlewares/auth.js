@@ -29,7 +29,7 @@ function authentication(req, res, next) {
 }
 
 function addProductAuthorization(req, res, next) {
-  if (req.user.role === "Participant") {
+  if (req.user.role === "Seller") {
     next();
   } else {
     res.status(403).json({ message: "Forbidden Access" });
@@ -40,7 +40,7 @@ function editDeleteProductAuthorization(req, res, next) {
   Product.findByPk(req.params.id)
     .then((result) => {
       if (result) {
-        if (req.user.role === "Participant" && req.user.id === result.UsersId) {
+        if (req.user.role === "Seller" && req.user.id === result.UsersId) {
           next();
         } else {
           res.status(403).json({ message: "Forbidden Access" });

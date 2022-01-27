@@ -3,12 +3,12 @@ const { comparePassword } = require("../helpers/bcrypt");
 const { generateJWT } = require("../helpers/jwt");
 
 class Controller {
-  static registerParticipant(req, res) {
+  static registerSeller(req, res) {
     const input = {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      role: "Participant",
+      role: "Seller",
       phoneNumber: req.body.phoneNumber,
       address: req.body.address,
     };
@@ -93,6 +93,15 @@ class Controller {
         console.log(err, "<<<<<<<<<<<<<<<<<<<<<<<<masuk eror login");
         res.status(500).json({ message: err.message });
       });
+  }
+
+  static checkout(req, res) {
+    try {
+      
+      
+    } catch (error) {
+      
+    }
   }
 }
 

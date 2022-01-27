@@ -1,4 +1,5 @@
 const { Bookmark, Product, User } = require("../models");
+const { format } = require(`../helpers/formatCurrency`);
 
 class Controller {
   static findAllBookmark(req, res) {
@@ -7,6 +8,7 @@ class Controller {
       where: {
         UsersId: req.user.id,
       },
+      // price = format(price) /////////////////////?/
     })
       .then((result) => {
         res.status(200).json(result);
@@ -20,6 +22,7 @@ class Controller {
     const input = {
       ProductId: req.body.ProductId,
       UsersId: req.user.id,
+      status: "pending",
     };
 
     Bookmark.create(input)
@@ -49,6 +52,28 @@ class Controller {
       .catch((err) => {
         res.status(500).json({ message: err.message });
       });
+  }
+
+  static checkout(req, res) {
+    Bookmark.findAll({
+      where: {
+        [Op.and]: [{ UserId: req.user.id }, { status: `pending` }],
+      },
+      attributes: {
+        exclude: ["createdAt", `updatedAt`],
+      },
+      include: {
+        model: Product,
+        attributes: {
+          exclude: ["createdAt", `updatedAt`],
+        },
+      },
+    });
+
+    let orderDetail = {
+      totalPrice: 0,
+      product: [],
+    };
   }
 }
 
