@@ -8,6 +8,10 @@ module.exports = (err, req, res, next) => {
       status = 401;
       message = 'invalid identification token';
       break;
+    case 'Forbidden':
+      status = 403;
+      message = 'access is not allowed';
+      break;
     case 'NotFound':
       status = 404;
       message = 'targeted resource does not exist';

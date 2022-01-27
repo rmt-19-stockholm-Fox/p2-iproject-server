@@ -31,7 +31,7 @@ module.exports = {
 
       await makePublic(post.id);
 
-      res.json({
+      res.status(201).json({
         id: post.id,
         images,
         createdAt: post.createdAt
@@ -76,15 +76,21 @@ module.exports = {
 
   async deletePost(req, res, next) {
     try {
+      const post = await Post.findByPk(req.params.id);
+
+      if (!post) {
+        throw { name: 'NotFound' };
+      }
+
+      if (post.UserId != req.user.id) {
+        throw { name: 'Forbidden' };
+      }
+
       await deleteUploadedFiles(req.params.id);
       
       const deletedCount = await Post.destroy({
         where: { id: req.params.id }
       });
-
-      if (deletedCount === 0) {
-        throw { name: 'NotFound' };
-      }
 
       res.json({
         message: 'post has been deleted'
