@@ -25,7 +25,8 @@ module.exports = {
 
       const params = {
         key: process.env.GPLACES_API_KEY,
-        query: req.query.name
+        query: req.query.name,
+        location: '-6.170280329097068,106.8240104937367'
       };
 
       if (req.query.location) {
