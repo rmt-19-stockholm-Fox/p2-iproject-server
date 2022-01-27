@@ -112,7 +112,7 @@ function cleanTempFile(file) {
 
 function makePublic(postId) {
   const options = {
-    prefix: `posts/${postId}/`
+    prefix: `${process.env.NODE_ENV}/posts/${postId}/`
   };
   
   return new Promise((resolve, reject) => {
@@ -128,7 +128,7 @@ function makePublic(postId) {
 
 async function uploadFile(postId, file, index) {
   const options = {
-    destination: `posts/${postId}/img-${index}${path.extname(file.filename)}`,
+    destination: `${process.env.NODE_ENV}/posts/${postId}/img-${index}${path.extname(file.filename)}`,
     validation: 'crc32c',
     resumable: true,
     public: true
@@ -148,7 +148,7 @@ async function uploadFile(postId, file, index) {
 
 function deleteUploadedFiles(postId) {
   const options = {
-    prefix: `posts/${postId}/`
+    prefix: `${process.env.NODE_ENV}/posts/${postId}/`
   }
 
   return new Promise((resolve, reject) => {
