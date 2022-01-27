@@ -24,8 +24,6 @@ router.post(
   addProductAuthorization,
   productController.addProduct
 );
-// router.post('/sendEmail', productController.sendEmail)
-// router.post('/sendSms', productController.sendSms)
 router.use("/:id", editDeleteProductAuthorization);
 router.delete("/:id", productController.deleteProduct);
 router.put(
