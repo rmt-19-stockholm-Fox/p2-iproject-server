@@ -1,0 +1,36 @@
+{
+  "name": "p2-iproject-server",
+  "version": "1.0.0",
+  "description": "Individual Project - Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BROOCHE/p2-iproject-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BROOCHE/p2-iproject-server/issues"
+  },
+  "homepage": "https://github.com/BROOCHE/p2-iproject-server#readme",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "pastebin-api": "^3.0.0",
+    "pg": "^8.7.1",
+    "sequelize": "^6.14.1"
+  },
+  "devDependencies": {
+    "dotenv": "^14.3.0",
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1",
+    "supertest": "^6.2.2"
+  }
+}
