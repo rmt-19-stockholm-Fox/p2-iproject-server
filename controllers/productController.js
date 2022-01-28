@@ -54,7 +54,7 @@ class Controller {
       });
   }
 
-  static findAllMyProduct() {
+  static findAllMyProduct(req, res) {
     Product.findAll({
       where: {
         UsersId: req.user.id,

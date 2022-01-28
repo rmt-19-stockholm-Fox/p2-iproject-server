@@ -16,7 +16,7 @@ const productController = require("../controllers/productController");
 router.get("/", productController.findAll);
 router.get("/:id", productController.findSelected);
 router.use(authentication);
-router.get("/myProduct", productController.findAllMyProduct);
+router.get("/seller/myProduct", productController.findAllMyProduct);
 router.post(
   "/",
   upload.array("ProductImage", 3),
