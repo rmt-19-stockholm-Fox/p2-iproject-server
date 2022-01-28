@@ -1,5 +1,8 @@
 const errhand = (err, req, res, next) => {
-  console.log(err);
+  if (err) {
+    console.log(err);
+    res.status(500).json({ message: "errors have not been handled!" });
+  }
 };
 
 module.exports = errhand;

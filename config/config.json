@@ -14,7 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable":"https://planmyholiday.herokuapp.com/",
+    "use_env_variable":"postgres://lnyebemsuezrea:d54bf65943e8445b773cb3d28bc86920aaf9811da52ac1e1e90bc9dec10ed584@ec2-34-205-209-14.compute-1.amazonaws.com:5432/d1g84eeuakrgk5",
     "ssl": true,
     "dialect": "postgres",
     "protocol": "postgres",

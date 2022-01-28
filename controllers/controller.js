@@ -5,7 +5,7 @@ class Controller {
   static async findMeTheTime(req, res, next) {
     try {
       const calkey = process.env.CALENDARIFIC_KEY;
-      let { country, forcednum, nmdayoff, year, streak } = req.body;
+      let { country, forcednum, nmdayoff, year } = req.body;
       let spdayoff = [];
       let spdayname = [];
 
@@ -19,32 +19,341 @@ class Controller {
         case `algeria`:
           country = `dz`;
           break;
-        case `american samoa`:
-          country = `as`;
+        case `argentina`:
+          country = `ar`;
           break;
-        case `andorra`:
-          country = `ad`;
+        case `australia`:
+          country = `au`;
           break;
-        case `indonesia`:
-          country = `id`;
+        case `austria`:
+          country = `at`;
           break;
-        case `united kingdom`:
-          country = `gm`;
+        case `bangladesh`:
+          country = `bd`;
           break;
-        case `united sates`:
-          country = `us`;
+        case `belgium`:
+          country = `be`;
           break;
-        case `japan`:
-          country = `jp`;
+        case `bhutan`:
+          country = `bt`;
+          break;
+        case `bolivia`:
+          country = `bo`;
+          break;
+        case `botswana`:
+          country = `bw`;
+          break;
+        case `brazil`:
+          country = `br`;
+          break;
+        case `brunei`:
+          country = `bn`;
+          break;
+        case `bulgaria`:
+          country = `bg`;
+          break;
+        case `cambodia`:
+          country = `kh`;
+          break;
+        case `canada`:
+          country = `ca`;
+          break;
+        case `chile`:
+          country = `cl`;
+          break;
+        case `china`:
+          country = `cn`;
+          break;
+        case `colombia`:
+          country = `co`;
+          break;
+        case `congo`:
+          country = `cg`;
+          break;
+        case `croatia`:
+          country = `hr`;
+          break;
+        case `cuba`:
+          country = `cu`;
+          break;
+        case `czech republic`:
+          country = `cz`;
+          break;
+        case `denmark`:
+          country = `dk`;
+          break;
+        case `dominica`:
+          country = `dm`;
+          break;
+        case `ecuador`:
+          country = `ec`;
+          break;
+        case `egypt`:
+          country = `eg`;
+          break;
+        case `estonia`:
+          country = `ee`;
+          break;
+        case `ethiopia`:
+          country = `et`;
+          break;
+        case `finland`:
+          country = `fi`;
+          break;
+        case `france`:
+          country = `fr`;
+          break;
+        case `gabon`:
+          country = `ga`;
+          break;
+        case `georgia`:
+          country = `ge`;
+          break;
+        case `germany`:
+          country = `de`;
+          break;
+        case `gibraltar`:
+          country = `gi`;
+          break;
+        case `greece`:
+          country = `gr`;
+          break;
+        case `greenland`:
+          country = `gl`;
+          break;
+        case `guatemala`:
+          country = `gt`;
+          break;
+        case `haiti`:
+          country = `ht`;
+          break;
+        case `hong Kong`:
+          country = `hk`;
+          break;
+        case `hungary`:
+          country = `hu`;
+          break;
+        case `iceland`:
+          country = `is`;
           break;
         case `india`:
           country = `in`;
           break;
-        case `russia`:
-          country = `eu`;
+        case `indonesia`:
+          country = `id`;
+          break;
+        case `iran`:
+          country = `ir`;
+          break;
+        case `iraq`:
+          country = `iq`;
+          break;
+        case `ireland`:
+          country = `ie`;
+          break;
+        case `israel`:
+          country = `il`;
+          break;
+        case `italy`:
+          country = `it`;
+          break;
+        case `jamaica`:
+          country = `jm`;
           break;
         case `japan`:
           country = `jp`;
+          break;
+        case `kazakhstan`:
+          country = `kz`;
+          break;
+        case `kenya`:
+          country = `ke`;
+          break;
+        case `kuwait`:
+          country = `kw`;
+          break;
+        case `kyrgyzstan`:
+          country = `kg`;
+          break;
+        case `laos`:
+          country = `la`;
+          break;
+        case `latvia`:
+          country = `lv`;
+          break;
+        case `lebanon`:
+          country = `lb`;
+          break;
+        case `libya`:
+          country = `ly`;
+          break;
+        case `lithuania`:
+          country = `lt`;
+          break;
+        case `madagascar`:
+          country = `mg`;
+          break;
+        case `malaysia`:
+          country = `my`;
+          break;
+        case `maldives`:
+          country = `mv`;
+          break;
+        case `mexico`:
+          country = `mx`;
+          break;
+        case `mongolia`:
+          country = `mn`;
+          break;
+        case `montenegro`:
+          country = `me`;
+          break;
+        case `morocco`:
+          country = `ma`;
+          break;
+        case `myanmar`:
+          country = `mm`;
+          break;
+        case `namibia`:
+          country = `na`;
+          break;
+        case `nepal`:
+          country = `np`;
+          break;
+        case `netherlands`:
+          country = `nl`;
+          break;
+        case `new zealand`:
+          country = `nz`;
+          break;
+        case `nigeria`:
+          country = `ng`;
+          break;
+        case `north Korea`:
+          country = `kp`;
+          break;
+        case `north macedonia`:
+          country = `mk`;
+          break;
+        case `norway`:
+          country = `no`;
+          break;
+        case `pakistan`:
+          country = `pk`;
+          break;
+        case `panama`:
+          country = `pa`;
+          break;
+        case `paraguay`:
+          country = `py`;
+          break;
+        case `peru`:
+          country = `pe`;
+          break;
+        case `philippines`:
+          country = `pl`;
+          break;
+        case `poland`:
+          country = `ad`;
+          break;
+        case `portugal`:
+          country = `pt`;
+          break;
+        case `puerto Rico`:
+          country = `qa`;
+          break;
+        case `qatar`:
+          country = `re`;
+          break;
+        case `romania`:
+          country = `ro`;
+          break;
+        case `russia`:
+          country = `ru`;
+          break;
+        case `samoa`:
+          country = `ws`;
+          break;
+        case `saudi Arabia`:
+          country = `sa`;
+          break;
+        case `serbia`:
+          country = `rs`;
+          break;
+        case `singapore`:
+          country = `sg`;
+          break;
+        case `slovakia`:
+          country = `sk`;
+          break;
+        case `somalia`:
+          country = `so`;
+          break;
+        case `south africa`:
+          country = `za`;
+          break;
+        case `south korea`:
+          country = `kr`;
+          break;
+        case `spain`:
+          country = `es`;
+          break;
+        case `sri Lanka`:
+          country = `lk`;
+          break;
+        case `sweden`:
+          country = `se`;
+          break;
+        case `switzerland`:
+          country = `ch`;
+          break;
+        case `syria`:
+          country = `sy`;
+          break;
+        case `taiwan`:
+          country = `tw`;
+          break;
+        case `tanzania`:
+          country = `tz`;
+          break;
+        case `thailand`:
+          country = `th`;
+          break;
+        case `turkey`:
+          country = `tr`;
+          break;
+        case `uganda`:
+          country = `ug`;
+          break;
+        case `ukraine`:
+          country = `ua`;
+          break;
+        case `united kingdom`:
+          country = `gb`;
+          break;
+        case `united sates`:
+          country = `us`;
+          break;
+        case `uruguay`:
+          country = `uy`;
+          break;
+        case `uzbekistan`:
+          country = `uz`;
+          break;
+        case `venezuela`:
+          country = `ve`;
+          break;
+        case `vietnam`:
+          country = `vn`;
+          break;
+        case `yemen`:
+          country = `ye`;
+          break;
+        case `zambia`:
+          country = `zm`;
+          break;
+        case `zimbabwe`:
+          country = `zw`;
           break;
         default:
           throw { name: "Data not found!" };
@@ -89,10 +398,7 @@ class Controller {
         });
       });
 
-      if (!streak) {
-        streak = nmdayoff.length + +forcednum;
-      }
-
+      const streak = nmdayoff.length + +forcednum;
       let output = [];
 
       for (let i = 0; i < alldate.length; i++) {
@@ -204,7 +510,49 @@ class Controller {
     }
   }
 
-  static async findMeTheHotel(req, res, next) {}
+  static async findMeTheHotel(req, res, next) {
+    try {
+      const hokey = process.env.HOTELS_KEY;
+      let { strname, star, mgrating, maxprice } = req.body;
+      strname = strname.split(" ");
+      strname = strname.join("%20");
+      const result = await axios.get(
+        `https://hotels4.p.rapidapi.com/locations/v2/search?query=${strname}`,
+        {
+          headers: {
+            "x-rapidapi-host": "hotels4.p.rapidapi.com",
+            "x-rapidapi-key": hokey,
+          },
+        }
+      );
+      let ineedthis = "";
+      console.log(result.data);
+
+      if (result.data.suggestions[0].entities.length > 0) {
+        ineedthis = result.data.suggestions[0].entities[0].destinationId;
+      } else if (result.data.suggestions[1].entities.length > 0) {
+        ineedthis = result.data.suggestions[1].entities[1].destinationId;
+      } else if (result.data.suggestions[2].entities.length > 0) {
+        ineedthis = result.data.suggestions[2].entities[2].destinationId;
+      } else if (result.data.suggestions[3].entities.length > 0) {
+        ineedthis = result.data.suggestions[3].entities[3].destinationId;
+      }
+
+      const resultforeal = await axios.get(
+        `https://hotels4.p.rapidapi.com/properties/list?destinationId=${ineedthis}&pageNumber=1&pageSize=8&checkIn=2021-01-08&checkOut=2021-01-09&adults1=1&starRatings=${star}&priceMax=${maxprice}&sortOrder=PRICE&currency=USD&guestRatingMin=${mgrating}`,
+        {
+          headers: {
+            "x-rapidapi-host": "hotels4.p.rapidapi.com",
+            "x-rapidapi-key": hokey,
+          },
+        }
+      );
+
+      res.status(200).json(resultforeal.data.data.body.searchResults.results);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = Controller;

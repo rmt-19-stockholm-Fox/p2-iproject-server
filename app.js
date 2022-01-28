@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post(`/findtime`, Cont.findMeTheTime);
 app.post(`/findplace`, Cont.findMeThePlace);
-app.get(`/findhotel`, Cont.findMeTheHotel);
+app.post(`/findhotel`, Cont.findMeTheHotel);
 app.use(errhand);
 
 app.listen(port, () => {
